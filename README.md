@@ -17,24 +17,8 @@ markdown file.
 
 ## Worst-Case Runtime Analysis
 
-The pivot function in a worst-case would start with $lo = 0$ meaning $(lo + 1) = 1$ until the end of the array or $arr.length - 1$, or $(n-2)$ times. 
+The pivot function in a worst-case would always pick either the smallest or largest unsorted element in the array, which would mean that for every call to pivot only a single element is put in the correct position. Furthmore this behavior would mean that the element is moved to either end of the array taking some $(n - k)$ runtime, $k$ being the correct position for that element, and being a value less than the length of the array.
 
-The while loop in the quicksort function would run either from $lo$ moving toward the end of the array, $hi$ moving toward the beginning of the array, or the two meeting somewhere in the middle, and in either three cases the loop iterates $(n-1)$ times. 
+The while loop in the quicksort function would run either from $lo$ moving toward the end of the array, $hi$ moving toward the beginning of the array, or the two meeting somewhere in the middle, however for just the worst-case we're only considering $lo$ or $hi$ moving toward one end of the array, and in both of these cases the loop iterates $(n - 2)$ times.
 
-Putting this together gives us:
-
-$T(n) = (n-2) + (n-1)\cdot[(n-2)+(n-2)]$
-
-$= (n-2) + (n-1)(2n-4)$
-
-$= (n-2) + (2n^{2} -4n -2n + 4)$
-
-$= (n-2) + (2n^{2} - 6n + 4)$
-
-$= n - 2 + 2n^{2} -6n + 4$
-
-$= 2n^{2} -5n + 2,  \text{ignoring constanats. . .}$
-
-$= n^{2} - n$
-
-Thus the worst-case runtime for this implementation is $\Theta(n^2)$
+Since pivot is nested in the while loop, and if we ignore lower terms and constants we're left with a worst-case runtime of $\Theta(n^2)$
